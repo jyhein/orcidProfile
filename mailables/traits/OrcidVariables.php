@@ -46,7 +46,7 @@ trait OrcidVariables
         $dispatcher = Application::get()->getDispatcher();
         $this->addData([
             self::$authorOrcidUrl => $oauthUrl,
-            self::$orcidAboutUrl => $dispatcher->url($request, Application::ROUTE_PAGE, null, 'orcidapi', 'about'),
+            self::$orcidAboutUrl => $dispatcher->url($request, Application::ROUTE_PAGE, null, 'orcidapi', 'about', urlLocaleForPage: ''),
         ]);
     }
 }

@@ -335,7 +335,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
     public function buildOrcidReview($submission, $review, $request, $issue = null)
     {
-        $publicationUrl = $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+        $publicationUrl = $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, 'article', 'view', $submission->getId(), urlLocaleForPage: '');
         $context = $request->getContext();
         $publicationLocale = ($submission->getData('locale')) ? $submission->getData('locale') : 'en';
         $pubIdPlugins = PluginRegistry::loadCategory('pubIds', true, $context->getId()); // DO not remove
@@ -655,7 +655,8 @@ class OrcidProfilePlugin extends GenericPlugin
             'orcidapi',
             $handlerMethod,
             null,
-            $redirectParams
+            $redirectParams,
+            urlLocaleForPage: ''
         );
 
         return $this->getOauthPath() . 'authorize?' . http_build_query(
@@ -1234,7 +1235,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $publicationLocale = ($publication->getData('locale')) ? $publication->getData('locale') : 'en';
         $supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
-        $publicationUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+        $publicationUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'article', 'view', $submission->getId(), urlLocaleForPage: '');
 
         $orcidWork = [
             'title' => [
